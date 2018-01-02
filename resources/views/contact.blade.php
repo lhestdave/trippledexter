@@ -1,15 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
+	<h1>Contact</h1>
+	                <div class="panel-heading">Contact</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                    <form class="form-horizontal" method="POST" action="{{ 'contact/submit' }}">
                         {{ csrf_field() }}
+
+                        <div class="form-group{{ $errors->has('datenow') ? ' has-error' : '' }}">
+                            <label for="datenow" class="col-md-4 control-label">Date</label>
+
+                            <div class="col-md-6">
+                                <input id="datenow" type="date" class="form-control" name="datenow" value="{{ old('datenow') }}" required autofocus>
+
+                                @if ($errors->has('datenow'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('datenow') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>
@@ -38,54 +49,23 @@
                                 @endif
                             </div>
                         </div>
-
-                        <div class="form-group{{ $errors->has('program') ? ' has-error' : '' }}">
-                            <label for="program" class="col-md-4 control-label">Program</label>
-
-                            <div class="col-md-6">
-                                <input id="program" type="text" class="form-control" name="program" value="{{ old('program') }}" required>
-
-                                @if ($errors->has('program'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('program') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                        	<label for="message" class="col-md-4 control-label">Message</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <textarea id="message" class="form-control" name="message" value="" required>
+                                </textarea>
                             </div>
                         </div>
-
+                        	
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Register
+                                    Save/Add
                                 </button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-@endsection
+            @endsection

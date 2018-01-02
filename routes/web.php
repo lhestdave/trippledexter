@@ -12,12 +12,35 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Auth::routes();
 
+Route::get('/contact', 'MessagesController@index')->name('contact');
+Route::post('/contact/submit', 'MessagesController@submit');
+
+
+Route::get('/', 'HomeController@index')->name('welcome');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/request', 'RequestController@index')->name('request');
+Route::get('/experiment', 'ExperimentController@index')->name('experiment');
+//Route::get('/asset', 'AssetController@index')->name('asset');
+
+Route::prefix('asset')->group(function(){
+  Route::get('/', 'AssetController@index')->name('asset');
+  Route::post('/addnew', 'AssetController@addnew');
+  Route::get('/', 'AssetController@getAssets');//list of asset
+});
+Route::get('/assetimage', 'AssetController@getImages')->name('assetimage');
+
+Route::prefix('student')->group(function(){
+  Route::get('/', 'StudentController@index')->name('student');
+  Route::post('/addnew', 'StudentController@addnew');
+});
+
+Route::prefix('admin')->group(function(){
+  Route::get('/', 'AdminController@index')->name('admin.dashboard');
+  Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+  Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+});

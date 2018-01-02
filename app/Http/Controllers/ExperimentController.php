@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class ExperimentController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,10 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
-    }
-    public function welcome()
-    {
-        return view('welcome');
+        return view('experiment.index');
     }
 }
