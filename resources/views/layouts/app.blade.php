@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+		
+	
 </head>
 <body>
     <div id="app">
@@ -40,20 +42,22 @@
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-left">
-                        @guest
                         
-                        @else
+						@auth
+						
+						
                             <li class="dropdown">
                                 <a href="/customers" class="{{Request::is('request')?'active':''}} dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Customers<span class="caret"></span>
                                 </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="/so">Sales Orders</a></li>
-                                    <li><a href="/rp">Receive Payments</a></li>
-                                    <li><a href="/ci">Create Invoices</a></li>
-                                    <li><a href="/cs">Create Statements</a></li>
+                                <ul class="dropdown-menu list-group" role="menu">
+                                    <a href="#" class="list-group-item">Sales Orders</a>
+                                    <a href="#" class="list-group-item">Receive Payments</a>
+                                    <a href="#" class="list-group-item">Create Invoices</a>
+                                    <a href="#" class="list-group-item" data-toggle="modal"  data-target="#createSOA">Create Statements</a>	 <!--create statement of accounts-->														
                                 </ul>
-                            </li>
+							</li>
+							
                             <li class="dropdown">
                                 <a href="/vendors" class="{{Request::is('experiment')?'active':''}} dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Vendors<span class="caret"></span>
@@ -75,9 +79,11 @@
                             <li><a href="/analytics">Analytics</a></li>
                             <li><a href="/reports">Reports</a></li>
                             <li><a href="/contact">Contact</a></li>
-                        @endguest  
-
+                        @endauth
+									
+											
                     </ul>
+					
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
@@ -109,13 +115,19 @@
                         @endguest
                     </ul>
                 </div>
+				
+				
+				
+				
+				
+				
             </div>
         </nav>
-
-        @yield('content')
+		@yield('content')
+        @yield('modal_boxes')
     </div>
-
-    <!-- Scripts -->
+ <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    
 </body>
 </html>
